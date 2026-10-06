@@ -209,3 +209,7 @@ parts and every model have their own licenses ([which ones](docs/HOW_IT_WORKS.md
 Strata is free and open source. If it is useful to you, you can support its development:
 
 <p align="center"><a href="https://buymeacoffee.com/strataengine"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a></p>
+
+## Isolated P100 logits diagnostics
+
+[Diagnostic twins](docs/p100-vmad-diagnostic.md) instrument the first API decode verifier window for an isolated control/candidate correctness comparison. Their builds are separate from performance binaries.

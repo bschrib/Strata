@@ -7132,6 +7132,30 @@ int main(int argc, char** argv) {
                     std::printf("ERR %s\n", drive.d.failed && drive.d.fail ? drive.d.fail : err.c_str());
                     return 1;
                 }
+                // The API uses this serve loop, not the standalone generation loop's diagnostic hook.
+                if (first_window) {
+                    if (const char* path = std::getenv("STRATA_DUMP_FIRST_LOGITS")) {
+                        std::vector<float> row((size_t) ver.vocab());
+                        if (!ver.copy_logits(0, row.data())) {
+                            err = "first logits copy failed";
+                            std::printf("ERR %s\n", err.c_str());
+                            return 1;
+                        }
+                        std::FILE* file = std::fopen(path, "wb");
+                        if (file == nullptr) {
+                            err = std::string("first logits open failed: ") + path;
+                            std::printf("ERR %s\n", err.c_str());
+                            return 1;
+                        }
+                        const bool written = std::fwrite(row.data(), sizeof(float), row.size(), file) == row.size();
+                        const bool closed = std::fclose(file) == 0;
+                        if (!written || !closed) {
+                            err = std::string(!written ? "first logits write failed: " : "first logits close failed: ") + path;
+                            std::printf("ERR %s\n", err.c_str());
+                            return 1;
+                        }
+                    }
+                }
                 int a = 0;
                 while (a < T - 1 && window[(size_t) a + 1] == outv[(size_t) a]) ++a;
                 if (from_sfx) { ++sfx_windows; sfx_drafts += T - 1; sfx_ok += a; }
