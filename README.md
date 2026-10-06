@@ -1,5 +1,7 @@
 <h1 align="center">Strata</h1>
 
+This local branch adds an unmeasured sm_60-only native DP4A VMAD candidate. CPU-only tests and deferred CUDA parity/microbenchmark commands: [docs/p100-vmad.md](docs/p100-vmad.md). Deployment remains pinned to pristine upstream.
+
 **English** · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Português](README.pt-BR.md)
 
 <p align="center"><b>Run a 125-billion-parameter AI model on your own gaming PC</b><br>

@@ -14,6 +14,9 @@ offers the same steps as tools.
 
 ## Working on the code
 
+- This branch holds one unmeasured GP100-only native DP4A experiment; see `docs/p100-vmad.md`. CPU tests prove the arithmetic model and unchanged non-sm_60 preprocessing, not CUDA compilation or performance. Device checks wait for both P100s installed and acceptance tests complete. Do not change deployment or llama.cpp pins.
+- Scalar signed DP4A is a valid reference only when every intermediate addition fits int32. Use a widened/modulo oracle for overflow tests. Multi-instruction PTX must preserve input values until consumed.
+
 - How the engine works, every measured number, the API and all settings: [docs/DETAILS.md](docs/DETAILS.md) and
   the [paper](docs/paper/Strata-Paper.pdf).
 - AMD (HIP) build and validation: [docs/AMD_HIP.md](docs/AMD_HIP.md); multi-GPU: [docs/MULTI_GPU.md](docs/MULTI_GPU.md).
