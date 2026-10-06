@@ -24,3 +24,5 @@ offers the same steps as tools.
   `tools/test_setup_amd.py`, `tools/test_setup_choices.py`).
 - Keep the docs' style: plain words, measured numbers with what they were measured on, no claims without a
   measurement.
+
+- Diagnostic twins add the same opt-in first-logits hook to the API serve loop; the standalone hook does not cover API requests. See `docs/p100-vmad-diagnostic.md`. Keep their builds separate from performance binaries, and fail missing or failed dumps.
